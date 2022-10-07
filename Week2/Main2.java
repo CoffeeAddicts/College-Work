@@ -7,41 +7,40 @@ public class Main2
 
     public static void main(String[] args)
     {
-    Scanner scanner= new Scanner(System.in);
-    System.out.println("Input your marks from your test: ");
-    int mark = scanner.nextInt();  
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Input your Grade from your test: ");
+        String grade = scanner.nextLine();  
 
-    scanner.close();
+        scanner.close();
 
-    if (mark < Grades.NS.getValue() || mark > Grades.A.getValue())
-        System.out.println("This is an invalid mark");
-    else if (mark <= Grades.F.getValue())
-        System.out.println("This is a failed attempt");
-    else if (mark <= Grades.D.getValue())
-        System.out.println("This is a pass");
-    else if (mark <= Grades.C.getValue())
-        System.out.println("This is a 2:2");
-    else if (mark <= Grades.B.getValue())
-        System.out.println("This is a 2:1");
-    else
-        System.out.println("This is a 1st");
-    }
-
-
-    public enum Grades
-    {
-        NS(0), F(39), D(49), C(59), B(69), A(100);
-
-        private final int VALUE;
-
-        private Grades(int VALUE)
+        if (grade.equals("A"))
         {
-            this.VALUE = VALUE;
+            System.out.print("This is a 1st");
+        }
+        else if (grade.equals("B"))
+        {
+            System.out.print("This is a 2:1");
+        }
+        else if (grade.equals("C"))
+        {
+            System.out.print("This is a 2:2");
+        }
+        else if (grade.equals("D"))
+        {
+            System.out.print("This is a 3rd");
+        }
+        else if (grade.equals("E"))
+        {
+            System.out.print("This is a ordinary");
+        }
+        else if (grade.equals("F"))
+        {
+            System.out.print("This is a fail");
+        }
+        else
+        {
+            System.out.print("That is an invalid input");
         }
 
-        public int getValue()
-        {
-            return VALUE;
-        }
-    }
+    }       
 }

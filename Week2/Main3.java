@@ -7,7 +7,7 @@ public class Main3
     {
         for(int i = 0;i < 10;i++ )
         {
-            System.out.print(String.valueOf(i));
+            System.out.print(String.valueOf(i) + "\n");
         }
     }
 }
