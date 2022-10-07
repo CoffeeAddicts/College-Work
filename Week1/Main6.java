@@ -10,7 +10,9 @@ public class Main6
         System.out.println("Please enter your age");
         int age = scanner.nextInt();  
         
-        System.out.print(String.valueOf(2022-age));
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        System.out.print("You were born in: " + String.valueOf(year-age));
         
         scanner.close();
     }
