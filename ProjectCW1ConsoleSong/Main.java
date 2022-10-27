@@ -1,6 +1,7 @@
 package ProjectCW1ConsoleSong;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,13 +17,16 @@ public class Main
     public static void main(String[] args) throws IOException
     {
 
-        //need exception if file is empty       
-
         String name = "TEST31dfs515";
         String artist = "Tester45";
         String playCount = "999";
 
-        Add(name, artist, playCount);            
+
+        Add(name, "sfsdsesfdsfs", playCount);
+        Add(name, "sfsdsfdsadfs", playCount);
+        Add(name, artist, playCount);
+        Add(name, "sfsfsfdsfdfs", playCount);
+        Remove(name, artist);            
 
     }
 
@@ -31,17 +35,21 @@ public class Main
         boolean exists = CheckExists(name, artist);
         if (exists)
         {
-            System.out.println("\nAlready Exists");
+            System.out.println("Already Exists\n");
             return;
         }
         String id = IncrementID();
+        if(id == null)
+        {
+            id = "1";
+        }
         
         FileWriter fw = new FileWriter(_FILE, true);
         String totalString = (id+", "+name+","+artist+","+playCount+"\n");
         fw.write(totalString);
         fw.close();
 
-        System.out.print("\nADDED");
+        System.out.print("ADDED\n");
     }
 
     public static ArrayList<String> ReturnListFromFile() throws IOException
@@ -60,26 +68,79 @@ public class Main
 
     }
 
-    public static void Remove()
+    public static void Remove(String name, String artist) throws IOException
     {
 
+        // ISSUE when removing IDs dont stay they same...
+        ArrayList<String> listFromFile = ReturnListFromFile();
+
+        if (listFromFile == null) return;
+
+        String id = GetId(name, artist);
+
+        if (id == null) return;
+
+        listFromFile.remove(Integer.parseInt(id)-1);
+        System.out.println(listFromFile);
+        ClearTextFile();
+
+        for(String item : listFromFile)
+        {
+            List<String> itemSplit = Arrays.asList(item.split("\\s*,\\s*"));
+            Add(itemSplit.get(1), itemSplit.get(2), itemSplit.get(3));
+        }
 
     }
 
     public static void MainMenu()
     {
 
+
     }
 
-    public static void Update()
+    public static void ClearTextFile()
     {
+        try{
 
+            PrintWriter writer = new PrintWriter(_FILE);
+            writer.print("");
+            writer.close();
+        
+            }catch(Exception exception){
+        
+                System.out.println("Exception have been caught");
+        
+            }
+    }
+
+    public static void Update(String name, String artist, String playCount) throws IOException
+    {
+                // ISSUE when removing IDs dont stay they same...
+                ArrayList<String> listFromFile = ReturnListFromFile();
+
+                if (listFromFile == null) return;
+        
+                String id = GetId(name, artist);
+        
+                if (id == null) return;
+        
+                listFromFile.get(Integer.parseInt(id)-1);
+                System.out.println(listFromFile);
+                ClearTextFile();
+        
+                for(String item : listFromFile)
+                {
+                    List<String> itemSplit = Arrays.asList(item.split("\\s*,\\s*"));
+                    Add(itemSplit.get(1), itemSplit.get(2), itemSplit.get(3));
+                }
     }
 
     public static String IncrementID() throws IOException
     {
         String id = "";
         List<String> lastItem = GetLastItemFromList();
+        if (lastItem == null) return null;
+
         id = String.valueOf(Integer.parseInt(lastItem.get(0)) + 1);
         return id;
     }
@@ -87,14 +148,27 @@ public class Main
     public static String GetId(String name, String artist) throws IOException
     {
         String id = "0";
-        if (CheckExists(name, artist)) return id;
+        if (!CheckExists(name, artist)) return null;
+
+        ArrayList<String> listFromFile = ReturnListFromFile();
+        for (int i=0 ;i < listFromFile.size(); i ++)
+        {
+            List<String> testValue = Arrays.asList(listFromFile.get(i).split("\\s*,\\s*"));
+            if(name.equals(testValue.get(1)) && artist.equals(testValue.get(2)))
+            {
+                id = testValue.get(0); 
+            }
+        }
+
 
         return id;
     }
 
     public static List<String> GetLastItemFromList() throws IOException
     {
-        ArrayList<String> listFromFile = ReturnListFromFile();
+       ArrayList<String> listFromFile = ReturnListFromFile();
+
+       if(listFromFile.size() == 0) return null;
         
         String lastFullItem = listFromFile.get(listFromFile.size() - 1);
         List<String> item = Arrays.asList(lastFullItem.split("\\s*,\\s*"));
@@ -106,7 +180,6 @@ public class Main
     {
         ArrayList<String> listFromFile = ReturnListFromFile();
         boolean exists = false;
-        System.out.print(listFromFile);
         for (int i=0 ;i < listFromFile.size(); i ++)
         {
             List<String> testValue = Arrays.asList(listFromFile.get(i).split("\\s*,\\s*"));
