@@ -6,6 +6,5 @@
 6, testing,test,t
 7, testet,t,t
 8, test,tt,tt
-9, t,t,t
-10, tr,tr,tr
-11, 2,2,2
+9, r,r,r
+10, f,f,f

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Functions {
+    public static Scanner _scanner = new Scanner(System.in);
 
     public static void Add(String name, String artist, String playCount) throws IOException {
         boolean exists = Utilities.CheckExists(name, artist);
@@ -21,7 +22,7 @@ public class Functions {
         }
 
         ArrayList<String> listFromFile = Utilities.ReturnListFromFile();
-        if (listFromFile.size() > 10)
+        if (listFromFile.size() > 9)
         {
             System.out.println("List already contains 10 items");
             return;
@@ -73,10 +74,10 @@ public class Functions {
         System.out.println("|     5. Quit      |");
         System.out.println("====================");
 
-        Scanner scanner= new Scanner(System.in);
+        
         // need to close scanner once 
-        int selection = scanner.nextInt();  
-        scanner.nextLine();
+        int selection = _scanner.nextInt();  
+        _scanner.nextLine();
 
         if (selection == 1 )
         {
@@ -85,31 +86,35 @@ public class Functions {
 
         if (selection == 2 )
         {
-            System.out.print("YES");
-            String name = scanner.nextLine();
-            String artist = scanner.nextLine();
-            String playCount = scanner.nextLine();
+            System.out.print("Please enter the song name, artist name and play count of the song in the next 3 lines:");
+            _scanner.nextLine();
+            String name = _scanner.nextLine();
+            String artist = _scanner.nextLine();
+            String playCount = _scanner.nextLine();
 
             Add(name, artist, playCount);
         }
         if (selection == 3 )
         {
-            String name = scanner.nextLine();
-            String artist = scanner.nextLine();
-            String playCount = scanner.nextLine();
+            System.out.print("Please enter the song name, artist name and play count of the song in the next 3 lines:");
+            String name = _scanner.nextLine();
+            String artist = _scanner.nextLine();
+            String playCount = _scanner.nextLine();
 
             Update(name, artist, playCount);
         }
         if (selection == 4 )
         {
-            String name = scanner.nextLine();
-            String artist = scanner.nextLine();
+            System.out.print("Please enter the song name, artist name in the next 2 lines:");
+            String name = _scanner.nextLine();
+            String artist = _scanner.nextLine();
 
             Remove(name, artist);
         }
         if (selection == 5 )
         {
             Main._run = false;
+            _scanner.close();
         }
 
         System.out.println(("null"));
@@ -147,8 +152,5 @@ public class Functions {
         }
         Add(name, artist, playCount);
 
-    }
-
-
-    
+    }    
 }
