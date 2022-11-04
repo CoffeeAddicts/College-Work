@@ -21,12 +21,12 @@ public class Functions {
             id = "1";
         }
 
-        ArrayList<String> listFromFile = Utilities.ReturnListFromFile();
-        if (listFromFile.size() > 9)
-        {
-            System.out.println("List already contains 10 items");
-            return;
-        }
+        // ArrayList<String> listFromFile = Utilities.ReturnListFromFile();
+        // if (listFromFile.size() > 9)
+        // {
+        //     System.out.println("List already contains 10 items");
+        //     return;
+        // }
 
 
 
