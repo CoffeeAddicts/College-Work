@@ -7,4 +7,3 @@
 7, testet,t,t
 8, test,tt,tt
 9, r,r,r
-10, f,f,f
