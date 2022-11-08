@@ -5,109 +5,112 @@ import java.util.Scanner;
 import java.io.File;
 
 
-//public class Main {
-    //  final static String _PATHTOFILE = ("C:\\Users\\BartlomiejWojda\\source\\repos\\CollegeWork\\ProjectCW1ConsoleSong\\Data\\data.txt");
-    //  final static File _FILE = new File(_PATHTOFILE);
-    //  public static boolean _run = true;
-
-    // public static void main(String[] args) throws IOException {
-    //     while (_run){
-
-    //         Functions.MainMenu();
-    //         System.out.println("Press Enter to continue");
-    //         Functions._scanner.nextLine();
-    //     }
-    // }
-//}
 class Main {
-    final static String _PATHTOFILE = ("C:\\Users\\BartlomiejWojda\\source\\repos\\CollegeWork\\ProjectCW1ConsoleSong\\Data\\data.txt");
-    final static File _FILE = new File(_PATHTOFILE);
+    // final static String _PATHTOFILE = ("C:\\Users\\BartlomiejWojda\\source\\repos\\CollegeWork\\ProjectCW1ConsoleSong\\Data\\data.txt");
+    // final static File _FILE = new File(_PATHTOFILE);
     public static boolean _run = true;
     public static Scanner _scanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException 
     {
+        SongList mySongList = new SongList();
+        // Song song1 = new Song("The Wall","Pink Floyd",7);
+        // Song song2 = new Song("Yellow Submarine","Beatles",12);
+
+        // myPlaylist.addSong(song1);
+        // myPlaylist.addSong(song2);
+
         while (_run){
 
-            MainMenu();
+            MainMenu(mySongList);
             System.out.println("Press Enter to continue");
-            Functions._scanner.nextLine();
+            _scanner.nextLine();
         }
 
       //createSongs();
     }
 
-    public static void createSongs()
-    {   
+    // public static void createSongs()
+    // {   
 
-      Song song1 = new Song("The Wall","Pink Floyd",7);
-      Song song2 = new Song("Yellow Submarine","Beatles",12);
+    //   Song song1 = new Song("The Wall","Pink Floyd",7);
+    //   Song song2 = new Song("Yellow Submarine","Beatles",12);
           
         
-      song1.printSong();
-      song2.printSong();
+    //   song1.printSong();
+    //   song2.printSong();
 
     
-      Playlist myPlaylist = new Playlist();
-      myPlaylist.addSong(song1);
-      myPlaylist.addSong(song2);
+    //   SongList myPlaylist = new SongList();
+    //   myPlaylist.addSong(song1);
+    //   myPlaylist.addSong(song2);
 
-      System.out.println(myPlaylist.sizeOfPlaylist());
+    //   System.out.println(myPlaylist.sizeOfPlaylist());
   
 
-      myPlaylist.printAllSongs();
+    //   myPlaylist.printAllSongs();
       
-      myPlaylist.deleteSong(1);
-      myPlaylist.printAllSongs();
-      System.out.println("=============================");
-    }
+    //   myPlaylist.deleteSong(1);
+    //   myPlaylist.printAllSongs();
+    //   System.out.println("=============================");
+    // }
 
-    public static void MainMenu() throws IOException {
+    public static void MainMenu(SongList songList) throws IOException {
 
-        System.out.println("====================");
-        System.out.println("|     Main Menu    |");
-        System.out.println("====================");
-        System.out.println("|     1. View      |");
-        System.out.println("|     2. Add       |");
-        System.out.println("|     3. Update    |");
-        System.out.println("|     4. Remove    |");
-        System.out.println("|     5. Quit      |");
-        System.out.println("====================");
-
-        Playlist myPlaylist = new Playlist();
-
-        
-        // need to close scanner once 
+        System.out.println("=================================");
+        System.out.println("|           Main Menu           |");
+        System.out.println("=================================");
+        System.out.println("|          1. View Size         |");
+        System.out.println("|          2. View List         |");
+        System.out.println("|          3. View Over Amount  |");
+        System.out.println("|          4. Add               |");
+        System.out.println("|          5. Remove            |");
+        System.out.println("|          6. Quit              |");
+        System.out.println("=================================");
+ 
         int selection = _scanner.nextInt();  
         _scanner.nextLine();
 
         if (selection == 1 )
         {
-            System.out.println(myPlaylist.sizeOfPlaylist());
+            System.out.println(songList.sizeofSongList());
         }
 
         if (selection == 2 )
         {
-            System.out.print("Please enter the song name, artist name and play count of the song in the next 3 lines:");
+            songList.printAllSongs(0);
+        }
+        if (selection == 3 )
+        {
+            System.out.print("How many plays over would you like to view:\n");
+            //_scanner.nextLine();
+            int playAmount  = _scanner.nextInt();
             _scanner.nextLine();
+
+            songList.printAllSongs(playAmount);
+            
+        }
+        if (selection == 4 )
+        {
+            System.out.print("Please enter the song name, artist name and play count of the song you wish to add in the next 3 lines:\n");
+            //_scanner.nextLine();
             String name = _scanner.nextLine();
             String artist = _scanner.nextLine();
             int playCount = _scanner.nextInt();
 
-        }
-        if (selection == 3 )
-        {
-            System.out.print("Please enter the song name, artist name and play count of the song in the next 3 lines:");
-            String name = _scanner.nextLine();
-            String artist = _scanner.nextLine();
-            String playCount = _scanner.nextLine();
+            Song song = new Song(songList.SetID(),name,artist,playCount);
+            songList.addSong(song);
 
-        }
-        if (selection == 4 )
-        {
-            System.out.print("Please enter the song name, artist name in the next 2 lines:");
 
         }
         if (selection == 5 )
+        {
+            System.out.print("Please enter the ID of the song you wish to delete on the next line:\n");
+            int id = _scanner.nextInt();
+
+            songList.deleteSong(id - 1);
+
+        }
+        if (selection == 6)
         {
             Main._run = false;
             _scanner.close();

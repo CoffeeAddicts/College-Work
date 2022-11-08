@@ -1,17 +1,30 @@
 package ProjectCW1ConsoleSong;
 
 public class Song {
-    
+  
+  int songID;
   String songName;
   String artistName;
   int playCount;
 
 
-    public Song(String sName, String aName, int pCount)
+    public Song(int sID,String sName, String aName, int pCount)
     {
+      this.songID = sID;
       this.songName = sName;
       this.artistName = aName;
-      this.playCount=pCount;
+      this.playCount = pCount;
+    }
+
+    //get set SongID
+    public int getSongID()
+    {
+      return songID;
+    }
+
+    public void setSongID(int sID)
+    {
+      this.songID = sID;
     }
 
     //get set SongName
