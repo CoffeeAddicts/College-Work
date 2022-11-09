@@ -64,7 +64,7 @@ public class Song {
     //print song 
     public void printSong()
     {
-      System.out.println(songName + ","+ artistName + "," + playCount);    
+      System.out.println("    "+songName + "           "+ artistName + "          " + playCount);    
     } 
   
   

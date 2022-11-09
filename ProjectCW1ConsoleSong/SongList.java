@@ -28,7 +28,7 @@ public class SongList
 
     public void printAllSongs(int playAmount)
     { 
-        for (int index = 0; index <= songList.size(); index++)
+        for (int index = 0; index < songList.size(); index++)
         {
             if (songList.get(index).getPlayCount() > playAmount)
             {
@@ -46,15 +46,25 @@ public class SongList
     }
 
   //need a checkExists here
+  //This doesnt take into effect id
   public boolean CheckExists(Song songToCheck)
   {
+    ArrayList<String> existsList = new ArrayList<String>();
     boolean exists = false;
-    for(int i = 0; i < sizeofSongList(); i++)
+    if (sizeofSongList() == 0) return exists;
+        
+    for(int i = 0; i < sizeofSongList()-1; i++)
     {
-        if (songToCheck == songList.get(i))
+        if (songToCheck.songName.equals(songList.get(i).getSongName()) && songToCheck.artistName.equals(songList.get(i).getArtistName()))
         {
-            exists = true;
+            existsList.add("1");
         }
+        
+    }
+
+    if (existsList.contains("1"))
+    {
+        exists = true;
     }
     return exists;
   }
