@@ -7,14 +7,16 @@ import java.io.File;
 
 
 class Main {
-    // final static String _PATHTOFILE = ("C:\\Users\\BartlomiejWojda\\source\\repos\\CollegeWork\\ProjectCW1ConsoleSong\\Data\\data.txt");
-    // final static File _FILE = new File(_PATHTOFILE);
+    //Global variables used thoughout the code
+    //More efficient than constantly inserting them into methods.
     public static boolean _run = true;
     public static Scanner _scanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException 
     {
         SongList mySongList = new SongList();
 
+        // This while loop runs until the user selects the last option of the menu
+        // Once it is selected - the global run variable stops the loop from running. 
         while (_run){
 
             MainMenu(mySongList);
@@ -23,7 +25,7 @@ class Main {
         }
     }
 
-
+    // Prints out the options of the program and executes the users selection.
     public static void MainMenu(SongList songList) throws IOException {
 
         System.out.println("=================================");
@@ -39,44 +41,66 @@ class Main {
         System.out.println("=================================");
         
         int selection = 0;
+
+        // this try catch will make sure that the selection is of the right type.
+        // If the user tries to input something other than an integer, it will fail
+        //forcing the selection to be 0
         try 
         {
             selection = _scanner.nextInt();  
             _scanner.nextLine();
-        } catch (Exception e) 
+        } 
+        catch (Exception e) 
         {
             selection = 0;
         }
         
-
+        //prints size of song list
         if (selection == 1 )
         {
             System.out.println(songList.sizeofSongList());
         }
-
+        
+        //Prints all the songs in the list at the time 
         else if (selection == 2 )
         {
             songList.printAllSongs(-1);
         }
+
+        //Prints all the songs with a higher play count than the user defined
+        //Both this and the previous selection use the same method from SongList() to stop repeating code
+        //This uses a similar try catch to the selection variable
         else if (selection == 3 )
         {
             System.out.print("How many plays over would you like to view:\n");
-            //_scanner.nextLine();
-            int playAmount  = _scanner.nextInt();
+            int playAmount = 0;
+            try 
+            {
+                playAmount  = _scanner.nextInt();
             _scanner.nextLine();
+            } 
+            catch (Exception e) 
+            {
+                playAmount = 0;
+            }
 
             songList.printAllSongs(playAmount);
             
         }
+
+        // Allows the user to add their own songs into the song list
         else if (selection == 4 )
         {
             System.out.print("Please enter the song name, artist name and play count of the song you wish to add in the next 3 lines:\n");
-            //_scanner.nextLine();
             String name = _scanner.nextLine();
             String artist = _scanner.nextLine();
             int playCount = _scanner.nextInt();
 
             Song song = new Song(songList.SetID(),name,artist,playCount);
+
+            //This make sure that the song doesnt already exist in the list.
+            //if it exists it tells the user and moves on
+            //if it doesnt exists it adds it and tells the user it was added successfully.
             if(!songList.CheckExists(song))
             {
             songList.addSong(song);
@@ -88,6 +112,8 @@ class Main {
             }
 
         }
+
+        //Adds 10 pre-defined songs to the list
         else if (selection == 5)
         {
             Song song1 = new Song(songList.SetID(),"Shivers        ", "Ed Sheeran   ", 154509);
@@ -113,6 +139,8 @@ class Main {
             songList.addSong(song10);
 
         }
+
+        //Deletes asong using the ID of the song
         else if (selection == 6)
         {
             System.out.print("Please enter the ID of the song you wish to delete on the next line:\n");
@@ -121,12 +149,16 @@ class Main {
             songList.deleteSong(id - 1);
 
         }
+
+        //Changes the global _run variable to false and closes the scanner and exits the program.
         else if (selection == 7)
         {
             Main._run = false;
             _scanner.close();
             System.exit(0);
         }
+
+        //else here is used to make sure the user inputs a correct option from the menu
         else
         {
             System.out.println("Incorrect value. Please try again");
