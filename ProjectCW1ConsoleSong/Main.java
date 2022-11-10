@@ -37,20 +37,28 @@ class Main {
         System.out.println("|          6. Remove            |");
         System.out.println("|          7. Quit              |");
         System.out.println("=================================");
- 
-        int selection = _scanner.nextInt();  
-        _scanner.nextLine();
+        
+        int selection = 0;
+        try 
+        {
+            selection = _scanner.nextInt();  
+            _scanner.nextLine();
+        } catch (Exception e) 
+        {
+            selection = 0;
+        }
+        
 
         if (selection == 1 )
         {
             System.out.println(songList.sizeofSongList());
         }
 
-        if (selection == 2 )
+        else if (selection == 2 )
         {
             songList.printAllSongs(-1);
         }
-        if (selection == 3 )
+        else if (selection == 3 )
         {
             System.out.print("How many plays over would you like to view:\n");
             //_scanner.nextLine();
@@ -60,7 +68,7 @@ class Main {
             songList.printAllSongs(playAmount);
             
         }
-        if (selection == 4 )
+        else if (selection == 4 )
         {
             System.out.print("Please enter the song name, artist name and play count of the song you wish to add in the next 3 lines:\n");
             //_scanner.nextLine();
@@ -80,18 +88,18 @@ class Main {
             }
 
         }
-        if (selection == 5)
+        else if (selection == 5)
         {
-            Song song1 = new Song(songList.SetID(),"Shivers" , "Ed Sheeran", 154509);
-            Song song2 = new Song(songList.SetID(),"Matilda", "Harry Styles", 2564509);
-            Song song3 = new Song(songList.SetID(),"River", "Eminem", 256109);
-            Song song4 = new Song(songList.SetID(),"About Damn Time", "Lizzo",14809);
-            Song song5 = new Song(songList.SetID(),"Hart", "Gibbs", 95609);
-            Song song6 = new Song(songList.SetID(),"Star Walking", "Lil Naz X", 29689);
-            Song song7 = new Song(songList.SetID(),"Holiday", "Genzie", 52799);
-            Song song8 = new Song(songList.SetID(),"Click", "Jake Miller", 694509);
-            Song song9 = new Song(songList.SetID(),"Crisis", "Joshua Basset", 9082173);
-            Song song10 = new Song(songList.SetID(),"Grenade", "Bruno Mars", 1762901);
+            Song song1 = new Song(songList.SetID(),"Shivers        ", "Ed Sheeran   ", 154509);
+            Song song2 = new Song(songList.SetID(),"Matilda        ", "Harry Styles ", 2564509);
+            Song song3 = new Song(songList.SetID(),"River          ", "Eminem       ", 256109);
+            Song song4 = new Song(songList.SetID(),"About Damn Time", "Lizzo        ",14809);
+            Song song5 = new Song(songList.SetID(),"Hart           ", "Gibbs        ", 95609);
+            Song song6 = new Song(songList.SetID(),"Star Walking   ", "Lil Naz X    ", 29689);
+            Song song7 = new Song(songList.SetID(),"Holiday        ", "Genzie       ", 52799);
+            Song song8 = new Song(songList.SetID(),"Click          ", "Jake Miller  ", 694509);
+            Song song9 = new Song(songList.SetID(),"Crisis         ", "Joshua Basset", 9082173);
+            Song song10 = new Song(songList.SetID(),"Grenade       ", "Bruno Mars   ", 1762901);
 
             songList.addSong(song1);
             songList.addSong(song2);
@@ -105,7 +113,7 @@ class Main {
             songList.addSong(song10);
 
         }
-        if (selection == 6)
+        else if (selection == 6)
         {
             System.out.print("Please enter the ID of the song you wish to delete on the next line:\n");
             int id = _scanner.nextInt();
@@ -113,10 +121,15 @@ class Main {
             songList.deleteSong(id - 1);
 
         }
-        if (selection == 7)
+        else if (selection == 7)
         {
             Main._run = false;
             _scanner.close();
+            System.exit(0);
+        }
+        else
+        {
+            System.out.println("Incorrect value. Please try again");
         }
     }
   }

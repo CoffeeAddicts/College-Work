@@ -28,6 +28,8 @@ public class SongList
 
     public void printAllSongs(int playAmount)
     { 
+        System.out.print("ID      Song                    Artist              Playcount\n");
+        System.out.print("\n");
         for (int index = 0; index < songList.size(); index++)
         {
             if (songList.get(index).getPlayCount() > playAmount)
